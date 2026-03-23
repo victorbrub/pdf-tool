@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="meta.title">Edit PDF Metadata</title>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/edit-metadata.css" />
+</head>
+
+<body>
+    <div class="lang-selector">
+        <button class="lang-btn active" onclick="applyLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="applyLanguage('es')">ES</button>
+    </div>
+
+    <div class="container">
+        <a href="../home.html" class="back-link" data-i18n="meta.back">← All tools</a>
+        <h1 class="tool-heading" data-i18n="meta.heading">Edit Metadata</h1>
+        <p class="subtitle" data-i18n="meta.subtitle">View and update the title, author, subject and keywords stored
+            inside your PDF.</p>
+        <div class="privacy-badge" data-i18n="meta.badge">🔒 All processing happens in your browser — no uploads, no
+            server.</div>
+
+        <!-- Drop zone -->
+        <div class="drop-zone" id="dropZone">
+            <div class="drop-zone-icon">📋</div>
+            <p class="drop-zone-text" data-i18n="meta.drop">Drop your PDF here, or click to choose</p>
+            <p class="drop-zone-hint" data-i18n="meta.dropHint">One PDF file</p>
+            <input type="file" id="fileInput" accept="application/pdf" style="display:none" />
+        </div>
+
+        <!-- Error box -->
+        <div class="error-box" id="errorBox" style="display:none"></div>
+
+        <!-- Options panel -->
+        <div class="tool-panel" id="optionsPanel" style="display:none">
+            <div class="file-row">
+                <span class="file-row-name" id="fileNameLabel"></span>
+                <button class="btn-change-file" id="btnChangeFile" data-i18n="meta.change">Change file</button>
+            </div>
+
+            <!-- Editable fields -->
+            <div class="meta-field">
+                <label for="metaTitle" data-i18n="meta.fldTitle">Title</label>
+                <input type="text" class="meta-input" id="metaTitle" />
+            </div>
+
+            <div class="meta-field">
+                <label for="metaAuthor" data-i18n="meta.fldAuthor">Author</label>
+                <input type="text" class="meta-input" id="metaAuthor" />
+            </div>
+
+            <div class="meta-field">
+                <label for="metaSubject" data-i18n="meta.fldSubject">Subject</label>
+                <input type="text" class="meta-input" id="metaSubject" />
+            </div>
+
+            <div class="meta-field">
+                <label for="metaKeywords" data-i18n="meta.fldKeywords">Keywords</label>
+                <input type="text" class="meta-input" id="metaKeywords" />
+                <p class="meta-hint" data-i18n="meta.keywordsHint">Separate multiple keywords with commas.</p>
+            </div>
+
+            <div class="meta-field">
+                <label for="metaCreator" data-i18n="meta.fldCreator">Creator (application)</label>
+                <input type="text" class="meta-input" id="metaCreator" />
+            </div>
+
+            <hr class="section-divider" />
+
+            <!-- Read-only fields -->
+            <div class="meta-readonly" id="readonlyBlock">
+                <div class="meta-readonly-row">
+                    <span class="meta-readonly-label" data-i18n="meta.roProducer">Producer</span>
+                    <span class="meta-readonly-value" id="roProducer">—</span>
+                </div>
+                <div class="meta-readonly-row">
+                    <span class="meta-readonly-label" data-i18n="meta.roCreated">Created</span>
+                    <span class="meta-readonly-value" id="roCreated">—</span>
+                </div>
+                <div class="meta-readonly-row">
+                    <span class="meta-readonly-label" data-i18n="meta.roModified">Modified</span>
+                    <span class="meta-readonly-value" id="roModified">—</span>
+                </div>
+            </div>
+
+            <!-- Progress -->
+            <div class="progress-bar-wrap" id="progressWrap" style="display:none">
+                <div class="progress-bar" id="progressBar" style="width:0%"></div>
+            </div>
+            <p class="progress-label" id="progressLabel" style="display:none"></p>
+
+            <button class="btn-primary" id="btnSave" data-i18n="meta.saveBtn">Save Changes</button>
+        </div>
+
+        <!-- Results -->
+        <div class="results" id="results" style="display:none">
+            <div class="results-icon">✅</div>
+            <p class="results-title" data-i18n="meta.done">Done! Your updated PDF is ready.</p>
+            <a class="btn-primary" id="downloadLink" download data-i18n="meta.download">Download PDF</a>
+            <button class="btn-secondary" id="btnAgain" data-i18n="meta.again">Edit another</button>
+        </div>
+    </div>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/edit-metadata.js"></script>
+    <script>applyLanguage(localStorage.getItem('lang') || 'en');</script>
+</body>
+
+</html>

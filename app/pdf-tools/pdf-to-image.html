@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="p2i.title">PDF to Image — No Upload</title>
+    <script src="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.min.js"></script>
+    <!-- fflate for ZIP bundling (all-pages mode) -->
+    <script src="https://unpkg.com/fflate@0.8.2/umd/index.js"></script>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/pdf-to-image.css" />
+</head>
+
+<body>
+
+    <!-- LANG SELECTOR -->
+    <div class="lang-selector">
+        <button data-lang-btn="en" onclick="applyLanguage('en')">EN</button>
+        <button data-lang-btn="es" onclick="applyLanguage('es')">ES</button>
+    </div>
+
+    <div class="container">
+
+        <a href="../home.html" data-i18n="p2i.back"
+            style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:#6366f1;text-decoration:none;margin-bottom:1.5rem;font-weight:600;">←
+            All tools</a>
+
+        <h1 data-i18n="p2i.heading">🖼️ PDF to Image</h1>
+        <p class="subtitle" data-i18n="p2i.subtitle">Convert PDF pages to JPG or PNG, right in your browser</p>
+        <div class="privacy-badge" data-i18n="p2i.badge">
+            🔒 100% Private — Files never leave your device
+        </div>
+
+        <!-- DROP ZONE -->
+        <div class="drop-zone" id="dropZone">
+            <input type="file" id="fileInput" accept=".pdf" />
+            <div class="drop-icon">📂</div>
+            <p data-i18n-html="p2i.drop.label_html"><span>Click to choose</span> or drag & drop a PDF here</p>
+            <p data-i18n="p2i.drop.hint" style="font-size:0.8rem; margin-top:0.5rem; color:#475569;">
+                Each page will be converted to an image
+            </p>
+        </div>
+
+        <!-- ERROR -->
+        <div class="error-box" id="errorBox"></div>
+
+        <!-- OPTIONS + PREVIEW PANEL -->
+        <div class="tool-panel" id="optionsPanel">
+
+            <!-- File info row -->
+            <div class="file-row">
+                <span class="file-row-name" id="fileName">file.pdf</span>
+                <span class="file-row-pages" id="pageCountLabel">0 pages</span>
+                <label class="btn-change-file" for="fileInput" data-i18n="p2i.change_file">Change file</label>
+            </div>
+
+            <!-- Format selector -->
+            <div class="format-options">
+                <span class="format-label" data-i18n="p2i.format_label">Format:</span>
+                <button class="format-btn active" data-format="jpeg">JPG</button>
+                <button class="format-btn" data-format="png">PNG</button>
+            </div>
+
+            <!-- Quality slider (JPG only) -->
+            <div class="quality-row" id="qualityRow">
+                <label data-i18n="p2i.quality_label">Quality:</label>
+                <input type="range" id="qualitySlider" min="50" max="100" value="92" step="1" />
+                <span class="quality-value" id="qualityValue">92%</span>
+            </div>
+
+            <!-- Page preview grid -->
+            <div class="page-grid" id="pageGrid"></div>
+
+            <!-- Actions -->
+            <div class="actions" id="actionsRow">
+                <button class="btn-primary" id="convertBtn" data-i18n="p2i.convert_btn">
+                    🖼️ Convert to Images
+                </button>
+                <button class="btn-secondary" id="startOverBtn" data-i18n="p2i.start_over">
+                    🗑 Start Over
+                </button>
+            </div>
+
+            <!-- Progress -->
+            <div class="progress-bar-wrap" id="progressWrap">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="progressLabel"></div>
+
+        </div>
+
+        <!-- RESULTS -->
+        <div class="results" id="results">
+            <p class="results-title" data-i18n="p2i.done">✅ Done! Your images are ready</p>
+            <div class="result-files" id="resultFiles"></div>
+            <div class="actions" style="margin-top:1rem;">
+                <button class="btn-secondary" id="convertAgainBtn" data-i18n="p2i.convert_again">
+                    🖼️ Convert another PDF
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/pdf-to-image.js"></script>
+    <script>applyLanguage(localStorage.getItem('lang') || 'en');</script>
+
+</body>
+
+</html>

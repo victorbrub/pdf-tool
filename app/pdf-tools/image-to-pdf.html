@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="i2p.title">Image to PDF — No Upload</title>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/image-to-pdf.css" />
+</head>
+
+<body>
+
+    <!-- LANG SELECTOR -->
+    <div class="lang-selector">
+        <button data-lang-btn="en" onclick="applyLanguage('en')">EN</button>
+        <button data-lang-btn="es" onclick="applyLanguage('es')">ES</button>
+    </div>
+
+    <div class="container">
+
+        <a href="../home.html" data-i18n="i2p.back"
+            style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:#6366f1;text-decoration:none;margin-bottom:1.5rem;font-weight:600;">←
+            All tools</a>
+
+        <h1 data-i18n="i2p.heading">📄 Image to PDF</h1>
+        <p class="subtitle" data-i18n="i2p.subtitle">Combine JPG & PNG images into a single PDF, right in your
+            browser</p>
+        <div class="privacy-badge" data-i18n="i2p.badge">
+            🔒 100% Private — Files never leave your device
+        </div>
+
+        <!-- DROP ZONE -->
+        <div class="drop-zone" id="dropZone">
+            <input type="file" id="fileInput" accept="image/jpeg,image/png" multiple />
+            <div class="drop-icon">📂</div>
+            <p data-i18n-html="i2p.drop.label_html"><span>Click to choose</span> or drag & drop images here</p>
+            <p data-i18n="i2p.drop.hint" style="font-size:0.8rem; margin-top:0.5rem; color:#475569;">
+                Supports JPG and PNG. Add multiple images — they become pages.
+            </p>
+        </div>
+
+        <!-- ERROR -->
+        <div class="error-box" id="errorBox"></div>
+
+        <!-- FILE LIST + OPTIONS PANEL -->
+        <div class="tool-panel" id="imagesPanel">
+
+            <!-- Header row -->
+            <div class="img-list-header">
+                <span class="files-title" data-i18n="i2p.files_title">Images</span>
+                <span class="file-count-badge" id="fileCountBadge">0</span>
+                <label class="btn-add-more" for="fileInput" data-i18n="i2p.add_more">+ Add more</label>
+            </div>
+
+            <!-- Image list (sortable) -->
+            <ul class="img-list" id="imgList"></ul>
+
+            <!-- PDF options -->
+            <div class="pdf-options">
+                <div class="option-group">
+                    <label data-i18n="i2p.page_size_label">Page size:</label>
+                    <select id="pageSizeSelect">
+                        <option value="auto">Auto (fit image)</option>
+                        <option value="a4">A4</option>
+                        <option value="letter">Letter</option>
+                    </select>
+                </div>
+                <div class="option-group">
+                    <label data-i18n="i2p.margin_label">Margin:</label>
+                    <select id="marginSelect">
+                        <option value="0" data-i18n="i2p.margin_none">None</option>
+                        <option value="20" selected data-i18n="i2p.margin_small">Small</option>
+                        <option value="40" data-i18n="i2p.margin_medium">Medium</option>
+                        <option value="60" data-i18n="i2p.margin_large">Large</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions" id="actionsRow">
+                <button class="btn-primary" id="convertBtn" data-i18n="i2p.convert_btn">
+                    📄 Convert to PDF
+                </button>
+                <button class="btn-secondary" id="startOverBtn" data-i18n="i2p.start_over">
+                    🗑 Start Over
+                </button>
+            </div>
+
+            <!-- Progress -->
+            <div class="progress-bar-wrap" id="progressWrap">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="progressLabel"></div>
+
+        </div>
+
+        <!-- RESULTS -->
+        <div class="results" id="results">
+            <p class="results-title" data-i18n="i2p.done">✅ Done! Your PDF is ready</p>
+            <div class="result-files" id="resultFiles"></div>
+            <div class="actions" style="margin-top:1rem;">
+                <button class="btn-secondary" id="convertAgainBtn" data-i18n="i2p.convert_again">
+                    📄 Convert more images
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/image-to-pdf.js"></script>
+    <script>applyLanguage(localStorage.getItem('lang') || 'en');</script>
+
+</body>
+
+</html>

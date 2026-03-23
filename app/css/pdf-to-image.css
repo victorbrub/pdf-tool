@@ -1,0 +1,152 @@
+/* pdf-to-image.css — tool-specific styles only. Common styles in common.css */
+
+/* ── FORMAT OPTIONS ── */
+.format-options {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.format-label {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-right: 0.25rem;
+}
+
+.format-btn {
+    background: #0f172a;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    padding: 0.35rem 0.85rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-family: inherit;
+    font-weight: 600;
+    transition: all 0.15s;
+}
+
+.format-btn:hover {
+    border-color: #6366f1;
+    color: #e2e8f0;
+}
+
+.format-btn.active {
+    background: #312e81;
+    border-color: #6366f1;
+    color: #a5b4fc;
+}
+
+/* ── QUALITY SLIDER ── */
+.quality-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.quality-row label {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    white-space: nowrap;
+}
+
+.quality-row input[type="range"] {
+    flex: 1;
+    min-width: 120px;
+    accent-color: #6366f1;
+    cursor: pointer;
+}
+
+.quality-value {
+    font-size: 0.82rem;
+    color: #a5b4fc;
+    font-weight: 600;
+    min-width: 3rem;
+    text-align: right;
+}
+
+/* ── PAGE PREVIEW GRID ── */
+.page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.page-grid-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: center;
+}
+
+.page-grid-item canvas {
+    width: 100%;
+    border-radius: 0.4rem;
+    border: 2px solid #334155;
+    display: block;
+    transition: border-color 0.15s;
+}
+
+.page-grid-item:hover canvas {
+    border-color: #6366f1;
+}
+
+.page-grid-label {
+    font-size: 0.7rem;
+    color: #64748b;
+    text-align: center;
+}
+
+/* ── FILE INFO ROW ── */
+.file-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 0.6rem;
+    padding: 0.6rem 1rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.file-row-name {
+    font-size: 0.85rem;
+    color: #e2e8f0;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+}
+
+.file-row-pages {
+    font-size: 0.73rem;
+    color: #64748b;
+    white-space: nowrap;
+}
+
+.btn-change-file {
+    background: none;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    padding: 0.25rem 0.65rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-family: inherit;
+    transition: all 0.15s;
+    white-space: nowrap;
+}
+
+.btn-change-file:hover {
+    border-color: #6366f1;
+    color: #a5b4fc;
+}

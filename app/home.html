@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="home.title">Vic's PDF Tools — Free, Private &amp; Browser-Based</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 3rem 1.5rem;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto 3.5rem;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero p {
+            color: #94a3b8;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* ── TOOL GRID ── */
+        .tools-section {
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #475569;
+            margin-bottom: 1.25rem;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 900px) {
+            .tool-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 540px) {
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .tool-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            transition: border-color 0.2s, background 0.2s, transform 0.15s;
+        }
+
+        .tool-card:hover {
+            border-color: #6366f1;
+            background: #1e1b4b;
+            transform: translateY(-2px);
+        }
+
+        .tool-icon {
+            font-size: 1.8rem;
+            line-height: 1;
+        }
+
+        .tool-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        .tool-desc {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        .tool-arrow {
+            margin-top: auto;
+            padding-top: 0.75rem;
+            font-size: 0.8rem;
+            color: #6366f1;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* ── PRIVACY SECTION ── */
+        .privacy-section {
+            max-width: 860px;
+            margin: 0 auto;
+            background: #0d2d2a;
+            border: 1px solid #0d9488;
+            border-radius: 1rem;
+            padding: 2rem 2.5rem;
+        }
+
+        .privacy-section h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #5eead4;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .privacy-section p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            max-width: 680px;
+        }
+
+        .privacy-points {
+            list-style: none;
+            margin-top: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .privacy-points li {
+            font-size: 0.88rem;
+            color: #cbd5e1;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+
+        .privacy-points li::before {
+            content: "✓";
+            color: #2dd4bf;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 0.05rem;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            margin-top: 3.5rem;
+            color: #334155;
+            font-size: 0.8rem;
+        }
+
+        /* ── LANG SELECTOR ── */
+        .lang-selector {
+            position: fixed;
+            top: 1rem;
+            right: 1.5rem;
+            display: flex;
+            gap: 0.3rem;
+            z-index: 100;
+        }
+
+        .lang-selector button {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #94a3b8;
+            padding: 0.25rem 0.6rem;
+            border-radius: 0.4rem;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-family: inherit;
+            letter-spacing: 0.05em;
+            transition: all 0.15s;
+        }
+
+        .lang-selector button:hover {
+            border-color: #6366f1;
+            color: #e2e8f0;
+        }
+
+        .lang-selector button.active {
+            background: #312e81;
+            border-color: #6366f1;
+            color: #a5b4fc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LANG SELECTOR -->
+    <div class="lang-selector">
+        <button data-lang-btn="en" onclick="applyLanguage('en')">EN</button>
+        <button data-lang-btn="es" onclick="applyLanguage('es')">ES</button>
+    </div>
+
+    <!-- HERO -->
+    <header class="hero">
+        <h1 data-i18n="home.heading">🛠️ Vic's PDF Tools</h1>
+        <p data-i18n-html="home.subtitle">Free, browser-based utilities for your PDF files.<br />
+            No accounts, no uploads — everything stays on your device.</p>
+    </header>
+
+    <!-- TOOLS -->
+    <main>
+        <section class="tools-section">
+            <p class="section-label" data-i18n="home.tools_label">Available tools</p>
+            <div class="tool-grid">
+
+                <a class="tool-card" href="pdf-tools/pdf-splitter.html">
+                    <div class="tool-icon">✂️</div>
+                    <div class="tool-name" data-i18n="home.splitter.name">PDF Splitter</div>
+                    <div class="tool-desc" data-i18n="home.splitter.desc">
+                        Extract pages or ranges from any PDF and download them as
+                        individual files — instantly, without uploading.
+                    </div>
+                    <div class="tool-arrow" data-i18n="home.splitter.arrow">Open tool →</div>
+                </a>
+
+                <a class="tool-card" href="pdf-tools/pdf-merger.html">
+                    <div class="tool-icon">🔗</div>
+                    <div class="tool-name" data-i18n="home.merger.name">PDF Merger</div>
+                    <div class="tool-desc" data-i18n="home.merger.desc">
+                        Combine multiple PDFs into one file. Drag to reorder, then merge — no uploads needed.
+                    </div>
+                    <div class="tool-arrow" data-i18n="home.merger.arrow">Open tool →</div>
+                </a>
+
+                <a class="tool-card" href="pdf-tools/pdf-to-image.html">
+                    <div class="tool-icon">🖼️</div>
+                    <div class="tool-name" data-i18n="home.p2i.name">PDF to Image</div>
+                    <div class="tool-desc" data-i18n="home.p2i.desc">
+                        Convert every page of a PDF into a JPG or PNG image. Download individually or as a ZIP.
+                    </div>
+                    <div class="tool-arrow" data-i18n="home.p2i.arrow">Open tool →</div>
+                </a>
+
+                <a class="tool-card" href="pdf-tools/image-to-pdf.html">
+                    <div class="tool-icon">📄</div>
+                    <div class="tool-name" data-i18n="home.i2p.name">Image to PDF</div>
+                    <div class="tool-desc" data-i18n="home.i2p.desc">
+                        Combine JPG and PNG images into a single PDF. Drag to reorder, pick page size and margin.
+                    </div>
+                    <div class="tool-arrow" data-i18n="home.i2p.arrow">Open tool →</div>
+                </a>
+
+                <a class="tool-card" href="pdf-tools/extract-text.html">
+                    <div class="tool-icon">📝</div>
+                    <div class="tool-name" data-i18n="home.ext.name">Extract Text</div>
+                    <div class="tool-desc" data-i18n="home.ext.desc">
+                        Extract text from any PDF instantly. Supports digital PDFs and scanned documents via OCR.
+                    </div>
+                    <div class="tool-arrow" data-i18n="home.ext.arrow">Open tool →</div>
+                </a>
+
+                <a class="tool-card" href="pdf-tools/extract-images.html">
+                    <div class="tool-icon">🖼️</div>
+                    <div class="tool-name" data-i18n="home.exi.name">Extract Images</div>
+                    <div class="tool-desc" data-i18n="home.exi.desc">
+                        Pull all embedded raster images out of a PDF. Preview, download individually, or grab a ZIP.
+                    </div>
+                    <div class="tool-arrow" data-i18n="home.exi.arrow">Open tool →</div>
+                </a>
+
+                <a class="tool-card" href="pdf-tools/compress-pdf.html">
+                    <div class="tool-icon">🗜️</div>
+                    <div class="tool-name" data-i18n="home.cmp.name">Compress PDF</div>
+                    <div class="tool-desc" data-i18n="home.cmp.desc">
+                        Shrink any PDF with lossless stream compression or image-based re-encoding. See before/after
+                        size comparison.
+                    </div>
+                    <div class="tool-arrow" data-i18n="home.cmp.arrow">Open tool →</div>
+                </a>
+
+                <a class="tool-card" href="pdf-tools/encrypt-pdf.html">
+                    <div class="tool-icon">🔐</div>
+                    <div class="tool-name" data-i18n="home.enc.name">Encrypt PDF</div>
+                    <div class="tool-desc" data-i18n="home.enc.desc">
+                        Add password protection to any PDF. Set user & owner passwords plus permissions — all processed
+                        locally.
+                    </div>
+                    <div class="tool-arrow" data-i18n="home.enc.arrow">Open tool →</div>
+                </a>
+
+                <a class="tool-card" href="pdf-tools/rotate-reorder.html">
+                    <div class="tool-icon">🔄</div>
+                    <div class="tool-name" data-i18n="home.ror.name">Rotate &amp; Reorder</div>
+                    <div class="tool-desc" data-i18n="home.ror.desc">
+                        Drag pages to reorder them and rotate any page individually. Previews update in real time.
+                    </div>
+                    <div class="tool-arrow" data-i18n="home.ror.arrow">Open tool →</div>
+                </a>
+
+                <a class="tool-card" href="pdf-tools/remove-password.html">
+                    <div class="tool-icon">🔓</div>
+                    <div class="tool-name" data-i18n="home.rmp.name">Remove Password</div>
+                    <div class="tool-desc" data-i18n="home.rmp.desc">
+                        Unlock a password-protected PDF by supplying the password. The output is fully unlocked and
+                        unencrypted.
+                    </div>
+                    <div class="tool-arrow" data-i18n="home.rmp.arrow">Open tool →</div>
+                </a>
+
+                <a class="tool-card" href="pdf-tools/add-page-numbers.html">
+                    <div class="tool-icon">🔢</div>
+                    <div class="tool-name" data-i18n="home.pgn.name">Add Page Numbers</div>
+                    <div class="tool-desc" data-i18n="home.pgn.desc">
+                        Stamp page numbers on every page. Choose format, position, font size and starting number.
+                    </div>
+                    <div class="tool-arrow" data-i18n="home.pgn.arrow">Open tool →</div>
+                </a>
+
+                <a class="tool-card" href="pdf-tools/add-watermark.html">
+                    <div class="tool-icon">💧</div>
+                    <div class="tool-name" data-i18n="home.wm.name">Add Watermark</div>
+                    <div class="tool-desc" data-i18n="home.wm.desc">
+                        Stamp a custom text watermark (e.g. CONFIDENTIAL) diagonally on every page with adjustable
+                        opacity.
+                    </div>
+                    <div class="tool-arrow" data-i18n="home.wm.arrow">Open tool →</div>
+                </a>
+
+                <a class="tool-card" href="pdf-tools/crop-pdf.html">
+                    <div class="tool-icon">✂️</div>
+                    <div class="tool-name" data-i18n="home.crp.name">Crop PDF</div>
+                    <div class="tool-desc" data-i18n="home.crp.desc">
+                        Trim margins or focus on a region by adjusting the crop and media box of each page.
+                    </div>
+                    <div class="tool-arrow" data-i18n="home.crp.arrow">Open tool →</div>
+                </a>
+
+                <a class="tool-card" href="pdf-tools/edit-metadata.html">
+                    <div class="tool-icon">📋</div>
+                    <div class="tool-name" data-i18n="home.meta.name">Edit Metadata</div>
+                    <div class="tool-desc" data-i18n="home.meta.desc">
+                        View and edit the Title, Author, Subject, and Keywords stored in the PDF document properties.
+                    </div>
+                    <div class="tool-arrow" data-i18n="home.meta.arrow">Open tool →</div>
+                </a>
+
+                <a class="tool-card" href="pdf-tools/fill-forms.html">
+                    <div class="tool-icon">📝</div>
+                    <div class="tool-name" data-i18n="home.form.name">Fill PDF Forms</div>
+                    <div class="tool-desc" data-i18n="home.form.desc">
+                        Detect AcroForm fields and let you type, check, and select values before saving the filled PDF.
+                    </div>
+                    <div class="tool-arrow" data-i18n="home.form.arrow">Open tool →</div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- PRIVACY -->
+        <section class="privacy-section">
+            <h2 data-i18n="home.privacy.heading">🔒 Your files never leave your device</h2>
+            <p data-i18n="home.privacy.body">
+                Every tool on this site runs entirely inside your browser using standard
+                Web APIs. Nothing is sent to any server, logged, stored, or shared.
+            </p>
+            <ul class="privacy-points">
+                <li data-i18n="home.privacy.p1">All processing happens locally in your browser — no server involved.
+                </li>
+                <li data-i18n="home.privacy.p2">Files are read directly from your disk and never transmitted over the
+                    network.</li>
+                <li data-i18n="home.privacy.p3">No cookies, no analytics, no accounts required.</li>
+                <li data-i18n="home.privacy.p4">You can even use these tools offline once the page has loaded.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <span data-i18n="home.footer">PDF Tools — runs entirely in your browser</span>
+    </footer>
+
+    <script src="js/i18n.js"></script>
+    <script>applyLanguage(localStorage.getItem('lang') || 'en');</script>
+
+</body>
+
+</html>

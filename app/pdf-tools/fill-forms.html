@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="form.title">Fill PDF Forms</title>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/fill-forms.css" />
+</head>
+
+<body>
+    <div class="lang-selector">
+        <button class="lang-btn active" onclick="applyLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="applyLanguage('es')">ES</button>
+    </div>
+
+    <div class="container">
+        <a href="../home.html" class="back-link" data-i18n="form.back">← All tools</a>
+        <h1 class="tool-heading" data-i18n="form.heading">Fill PDF Forms</h1>
+        <p class="subtitle" data-i18n="form.subtitle">Fill in AcroForm text fields, checkboxes, dropdowns and radio
+            buttons, then save.</p>
+        <div class="privacy-badge" data-i18n="form.badge">🔒 All processing happens in your browser — no uploads, no
+            server.</div>
+
+        <!-- Drop zone -->
+        <div class="drop-zone" id="dropZone">
+            <div class="drop-zone-icon">📝</div>
+            <p class="drop-zone-text" data-i18n="form.drop">Drop your PDF here, or click to choose</p>
+            <p class="drop-zone-hint" data-i18n="form.dropHint">One PDF file with form fields</p>
+            <input type="file" id="fileInput" accept="application/pdf" style="display:none" />
+        </div>
+
+        <!-- Error box -->
+        <div class="error-box" id="errorBox" style="display:none"></div>
+
+        <!-- Options panel -->
+        <div class="tool-panel" id="optionsPanel" style="display:none">
+            <div class="file-row">
+                <span class="file-row-name" id="fileNameLabel"></span>
+                <span class="file-row-pages" id="filePagesLabel"></span>
+                <button class="btn-change-file" id="btnChangeFile" data-i18n="form.change">Change file</button>
+            </div>
+
+            <!-- No-forms notice (conditionally shown) -->
+            <div class="no-form-notice" id="noFormNotice" style="display:none">
+                <span class="no-form-notice-icon">ℹ️</span>
+                <span data-i18n="form.noFields">This PDF has no interactive form fields. Try a PDF with an
+                    AcroForm.</span>
+            </div>
+
+            <!-- Field count badge -->
+            <div class="field-count-badge" id="fieldCountBadge" style="display:none">
+                <span id="fieldCountText"></span>
+            </div>
+
+            <!-- Form fields list (dynamically populated) -->
+            <div class="form-fields-list" id="formFieldsList"></div>
+
+            <!-- Flatten option -->
+            <div class="option-section" id="flattenSection" style="display:none">
+                <label class="option-label"
+                    style="display:flex;align-items:center;gap:0.55rem;cursor:pointer;font-size:0.85rem;color:#94a3b8;">
+                    <input type="checkbox" id="flattenCheck"
+                        style="accent-color:#6366f1;width:16px;height:16px;cursor:pointer;" />
+                    <span data-i18n="form.flatten">Flatten form (make fields non-editable)</span>
+                </label>
+            </div>
+
+            <!-- Progress -->
+            <div class="progress-bar-wrap" id="progressWrap" style="display:none">
+                <div class="progress-bar" id="progressBar" style="width:0%"></div>
+            </div>
+            <p class="progress-label" id="progressLabel" style="display:none"></p>
+
+            <button class="btn-primary" id="btnSave" data-i18n="form.saveBtn">Save Filled PDF</button>
+        </div>
+
+        <!-- Results -->
+        <div class="results" id="results" style="display:none">
+            <div class="results-icon">✅</div>
+            <p class="results-title" data-i18n="form.done">Done! Your filled PDF is ready.</p>
+            <a class="btn-primary" id="downloadLink" download data-i18n="form.download">Download PDF</a>
+            <button class="btn-secondary" id="btnAgain" data-i18n="form.again">Fill another</button>
+        </div>
+    </div>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/fill-forms.js"></script>
+    <script>applyLanguage(localStorage.getItem('lang') || 'en');</script>
+</body>
+
+</html>

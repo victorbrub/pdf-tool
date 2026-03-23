@@ -1,0 +1,192 @@
+/* crop-pdf.css — Crop PDF tool */
+
+.file-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 0.6rem;
+    padding: 0.6rem 1rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.file-row-name {
+    font-size: 0.85rem;
+    color: #e2e8f0;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+}
+
+.file-row-pages {
+    font-size: 0.73rem;
+    color: #64748b;
+    white-space: nowrap;
+}
+
+.btn-change-file {
+    background: none;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    padding: 0.25rem 0.65rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-family: inherit;
+    transition: all 0.15s;
+    white-space: nowrap;
+}
+
+.btn-change-file:hover {
+    border-color: #6366f1;
+    color: #a5b4fc;
+}
+
+/* ── SCOPE TOGGLE ── */
+.scope-toggle {
+    display: flex;
+    border: 1px solid #334155;
+    border-radius: 0.6rem;
+    overflow: hidden;
+    width: fit-content;
+    margin: 0 auto 1.25rem;
+}
+
+.scope-btn {
+    padding: 0.45rem 1.1rem;
+    background: transparent;
+    border: none;
+    color: #64748b;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+    white-space: nowrap;
+}
+
+.scope-btn.active {
+    background: rgba(99, 102, 241, 0.15);
+    color: #a5b4fc;
+}
+
+.scope-btn:hover:not(.active) {
+    color: #94a3b8;
+}
+
+/* ── CROP INPUTS ── */
+.crop-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-bottom: 1.1rem;
+}
+
+@media (min-width: 420px) {
+    .crop-grid {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+.crop-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.crop-field label {
+    font-size: 0.75rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.crop-input {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 0.45rem;
+    color: #e2e8f0;
+    padding: 0.5rem 0.6rem;
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+    text-align: center;
+}
+
+.crop-input:focus {
+    border-color: #6366f1;
+}
+
+.crop-unit-note {
+    font-size: 0.76rem;
+    color: #475569;
+    text-align: center;
+    margin-bottom: 0.9rem;
+}
+
+/* ── PAGE RANGE (per-page scope) ── */
+.page-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.btn-page-nav {
+    background: #0f172a;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    width: 32px;
+    height: 32px;
+    border-radius: 0.45rem;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    font-family: inherit;
+}
+
+.btn-page-nav:hover:not(:disabled) {
+    border-color: #6366f1;
+    color: #a5b4fc;
+}
+
+.btn-page-nav:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.page-indicator {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    min-width: 5rem;
+    text-align: center;
+}
+
+/* ── CROP PREVIEW ── */
+.crop-preview-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.crop-canvas {
+    border: 1px solid #334155;
+    border-radius: 0.45rem;
+    max-width: 100%;
+    max-height: 260px;
+    image-rendering: auto;
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="cmp.title">Compress PDF — No Upload</title>
+    <script src="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.min.js"></script>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/compress-pdf.css" />
+</head>
+
+<body>
+
+    <!-- LANG SELECTOR -->
+    <div class="lang-selector">
+        <button data-lang-btn="en" onclick="applyLanguage('en')">EN</button>
+        <button data-lang-btn="es" onclick="applyLanguage('es')">ES</button>
+    </div>
+
+    <div class="container">
+
+        <a href="../home.html" data-i18n="cmp.back"
+            style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:#6366f1;text-decoration:none;margin-bottom:1.5rem;font-weight:600;">←
+            All tools</a>
+
+        <h1 data-i18n="cmp.heading">🗜️ Compress PDF</h1>
+        <p class="subtitle" data-i18n="cmp.subtitle">Reduce PDF file size directly in your browser</p>
+        <div class="privacy-badge" data-i18n="cmp.badge">
+            🔒 100% Private — Files never leave your device
+        </div>
+
+        <!-- DROP ZONE -->
+        <div class="drop-zone" id="dropZone">
+            <input type="file" id="fileInput" accept=".pdf" />
+            <div class="drop-icon">📂</div>
+            <p data-i18n-html="cmp.drop.label_html"><span>Click to choose</span> or drag & drop a PDF here</p>
+            <p data-i18n="cmp.drop.hint" style="font-size:0.8rem;margin-top:0.5rem;color:#475569;">
+                Lossless or image-based compression — your choice
+            </p>
+        </div>
+
+        <!-- ERROR -->
+        <div class="error-box" id="errorBox"></div>
+
+        <!-- OPTIONS PANEL -->
+        <div class="tool-panel" id="optionsPanel">
+
+            <!-- File info row -->
+            <div class="file-row">
+                <span class="file-row-name" id="fileName">file.pdf</span>
+                <span class="file-row-pages" id="pageCountLabel">0 pages</span>
+                <label class="btn-change-file" for="fileInput" data-i18n="cmp.change_file">Change file</label>
+            </div>
+
+            <!-- Mode toggle -->
+            <div class="mode-toggle">
+                <button class="mode-btn active" id="modeLossless" data-i18n="cmp.mode_lossless">
+                    🗂 Lossless
+                </button>
+                <button class="mode-btn" id="modeLossy" data-i18n="cmp.mode_lossy">
+                    🖼 Image-based
+                </button>
+            </div>
+
+            <!-- Lossless note -->
+            <div class="mode-note visible" id="noteLossless" data-i18n="cmp.note_lossless">
+                <strong>Lossless:</strong> Re-saves the PDF with compressed object streams. Preserves text, vectors and
+                fonts. Reduction is usually 5–25%.
+            </div>
+
+            <!-- Lossy note -->
+            <div class="mode-note" id="noteLossy" data-i18n="cmp.note_lossy">
+                <strong>Image-based:</strong> Re-renders every page as a JPEG and rebuilds the PDF. Can reduce size by
+                50–80%, but text becomes non-selectable.
+            </div>
+
+            <!-- Compression presets (lossy only) -->
+            <div id="presetSection" style="display:none;">
+                <div class="compression-presets">
+                    <button class="preset-btn" data-quality="85" data-scale="2">
+                        🟢 <span data-i18n="cmp.preset_light">Light</span>
+                        <span class="preset-sub" data-i18n="cmp.preset_light_sub">High quality</span>
+                    </button>
+                    <button class="preset-btn active" data-quality="65" data-scale="1.5">
+                        🟡 <span data-i18n="cmp.preset_medium">Medium</span>
+                        <span class="preset-sub" data-i18n="cmp.preset_medium_sub">Balanced</span>
+                    </button>
+                    <button class="preset-btn" data-quality="40" data-scale="1">
+                        🔴 <span data-i18n="cmp.preset_heavy">Heavy</span>
+                        <span class="preset-sub" data-i18n="cmp.preset_heavy_sub">Max compression</span>
+                    </button>
+                    <button class="preset-btn" data-quality="custom" data-scale="custom">
+                        ⚙️ <span data-i18n="cmp.preset_custom">Custom</span>
+                        <span class="preset-sub" data-i18n="cmp.preset_custom_sub">Fine-tune</span>
+                    </button>
+                </div>
+
+                <!-- Custom quality slider (hidden until Custom preset) -->
+                <div class="quality-row" id="customQualityRow" style="display:none;">
+                    <label data-i18n="cmp.quality_label">Quality:</label>
+                    <input type="range" id="qualitySlider" min="10" max="95" value="65" step="1" />
+                    <span class="quality-value" id="qualityValue">65%</span>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions">
+                <button class="btn-primary" id="compressBtn" data-i18n="cmp.compress_btn">
+                    🗜️ Compress PDF
+                </button>
+                <button class="btn-secondary" id="startOverBtn" data-i18n="cmp.start_over">
+                    🗑 Start Over
+                </button>
+            </div>
+
+            <!-- Progress -->
+            <div class="progress-bar-wrap" id="progressWrap">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="progressLabel"></div>
+
+        </div>
+
+        <!-- RESULTS -->
+        <div class="results" id="results">
+            <p class="results-title" data-i18n="cmp.done">✅ Done! Your compressed PDF is ready</p>
+            <div class="size-comparison" id="sizeComparison">
+                <div class="size-box">
+                    <div class="size-box-label" data-i18n="cmp.before_label">Original</div>
+                    <div class="size-box-value" id="sizeBeforeEl">—</div>
+                </div>
+                <span class="size-arrow">→</span>
+                <div class="size-box">
+                    <div class="size-box-label" data-i18n="cmp.after_label">Compressed</div>
+                    <div class="size-box-value" id="sizeAfterEl">—</div>
+                </div>
+                <span class="reduction-badge" id="reductionBadge"></span>
+            </div>
+            <div class="result-files" id="resultFiles"></div>
+            <div class="actions" style="margin-top:1rem;">
+                <button class="btn-secondary" id="compressAgainBtn" data-i18n="cmp.compress_again">
+                    🗜️ Compress another PDF
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/compress-pdf.js"></script>
+    <script>applyLanguage(localStorage.getItem('lang') || 'en');</script>
+
+</body>
+
+</html>

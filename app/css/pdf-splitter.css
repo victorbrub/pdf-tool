@@ -1,0 +1,270 @@
+/* pdf-splitter.css — splitter-specific styles only.
+   Common/shared styles live in common.css */
+
+/* .split-options keeps its original name in this tool */
+.split-options {
+    display: none;
+    margin-top: 1.5rem;
+    background: #1e293b;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 1px solid #334155;
+}
+
+.split-options.visible {
+    display: block;
+}
+
+/* ── FILE INFO ── */
+.file-info {
+    display: none;
+    background: #1e293b;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    border: 1px solid #334155;
+}
+
+.file-info.visible {
+    display: block;
+}
+
+.file-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.file-name {
+    font-weight: 600;
+    color: #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.page-count {
+    background: #312e81;
+    color: #a5b4fc;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+}
+
+.btn-clear {
+    background: none;
+    border: 1px solid #475569;
+    color: #94a3b8;
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+}
+
+.btn-clear:hover {
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+/* ── PAGE THUMBNAILS ── */
+.thumbnails-container {
+    margin-top: 1rem;
+}
+
+.thumbnails-label {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 0.75rem;
+}
+
+.thumbnails {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    padding-bottom: 0.75rem;
+}
+
+.thumbnail {
+    flex-shrink: 0;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.15s;
+}
+
+.thumbnail:hover {
+    transform: scale(1.05);
+}
+
+.thumbnail canvas {
+    border-radius: 0.4rem;
+    border: 2px solid #334155;
+    display: block;
+}
+
+.thumbnail.selected canvas {
+    border-color: #6366f1;
+}
+
+.thumbnail .page-num {
+    text-align: center;
+    font-size: 0.7rem;
+    color: #64748b;
+    margin-top: 0.3rem;
+}
+
+.thumbnail.selected .page-num {
+    color: #a5b4fc;
+}
+
+.thumbnail .check {
+    display: none;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: #6366f1;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.thumbnail.selected .check {
+    display: flex;
+}
+
+/* ── TABS ── */
+.tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    background: #0f172a;
+    padding: 0.3rem;
+    border-radius: 0.75rem;
+}
+
+.tab {
+    flex: 1;
+    padding: 0.6rem;
+    border: none;
+    background: none;
+    color: #64748b;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+
+.tab.active {
+    background: #312e81;
+    color: #a5b4fc;
+    font-weight: 600;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ── RANGE INPUT ── */
+.range-input-group {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+    min-width: 120px;
+}
+
+.input-field label {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.input-field input {
+    background: #0f172a;
+    border: 1px solid #334155;
+    color: #e2e8f0;
+    padding: 0.6rem 0.8rem;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-field input:focus {
+    border-color: #6366f1;
+}
+
+.range-hint {
+    font-size: 0.78rem;
+    color: #475569;
+    margin-top: 0.75rem;
+}
+
+/* ── CUSTOM RANGE ── */
+.custom-range-input {
+    width: 100%;
+    background: #0f172a;
+    border: 1px solid #334155;
+    color: #e2e8f0;
+    padding: 0.7rem 0.8rem;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.custom-range-input:focus {
+    border-color: #6366f1;
+}
+
+.custom-hint {
+    font-size: 0.78rem;
+    color: #475569;
+    margin-top: 0.5rem;
+}
+
+/* ── VISUAL SELECTION ── */
+.visual-hint {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 0.75rem;
+}
+
+.visual-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.btn-small {
+    background: none;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    padding: 0.3rem 0.75rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+
+.btn-small:hover {
+    border-color: #6366f1;
+    color: #a5b4fc;
+}

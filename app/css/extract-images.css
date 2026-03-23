@@ -1,0 +1,223 @@
+/* extract-images.css — tool-specific styles only. Common styles in common.css */
+
+/* ── FILE ROW ── */
+.file-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 0.6rem;
+    padding: 0.6rem 1rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.file-row-name {
+    font-size: 0.85rem;
+    color: #e2e8f0;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+}
+
+.file-row-pages {
+    font-size: 0.73rem;
+    color: #64748b;
+    white-space: nowrap;
+}
+
+.btn-change-file {
+    background: none;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    padding: 0.25rem 0.65rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-family: inherit;
+    transition: all 0.15s;
+    white-space: nowrap;
+}
+
+.btn-change-file:hover {
+    border-color: #6366f1;
+    color: #a5b4fc;
+}
+
+/* ── OPTIONS ROW ── */
+.options-row {
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+.options-row .option-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.options-row label {
+    font-size: 0.78rem;
+    color: #94a3b8;
+}
+
+.options-row input[type="text"],
+.options-row input[type="number"] {
+    background: #0f172a;
+    border: 1px solid #334155;
+    color: #e2e8f0;
+    padding: 0.32rem 0.65rem;
+    border-radius: 0.4rem;
+    font-size: 0.82rem;
+    font-family: inherit;
+    width: 160px;
+    transition: border-color 0.15s;
+    outline: none;
+}
+
+.options-row input[type="number"] {
+    width: 80px;
+}
+
+.options-row input::placeholder {
+    color: #475569;
+}
+
+.options-row input:focus {
+    border-color: #6366f1;
+}
+
+.options-hint {
+    font-size: 0.72rem;
+    color: #475569;
+    margin-top: 0.15rem;
+}
+
+/* ── RESULTS HEADER ── */
+.results-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.found-badge {
+    background: #312e81;
+    border: 1px solid #6366f1;
+    color: #a5b4fc;
+    border-radius: 999px;
+    padding: 0.2rem 0.75rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.btn-download-zip {
+    margin-left: auto;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border: none;
+    color: #fff;
+    padding: 0.4rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: opacity 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.btn-download-zip:hover {
+    opacity: 0.88;
+}
+
+.btn-download-zip:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+/* ── IMAGE RESULTS GRID ── */
+.img-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.85rem;
+}
+
+.img-result-card {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 0.6rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.15s;
+}
+
+.img-result-card:hover {
+    border-color: #6366f1;
+}
+
+.img-result-thumb {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    background: #020617;
+    display: block;
+    padding: 0.25rem;
+}
+
+.img-result-meta {
+    padding: 0.45rem 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.img-result-dims {
+    font-size: 0.72rem;
+    color: #64748b;
+}
+
+.btn-dl-img {
+    margin-top: 0.3rem;
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    border-radius: 0.4rem;
+    padding: 0.3rem 0.5rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    transition: all 0.15s;
+}
+
+.btn-dl-img:hover {
+    border-color: #6366f1;
+    color: #a5b4fc;
+}
+
+/* ── NO IMAGES STATE ── */
+.no-images-msg {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    color: #475569;
+    font-size: 0.9rem;
+}
+
+.no-images-msg .no-images-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.6rem;
+}

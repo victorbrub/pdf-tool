@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="ext.title">Extract Text — No Upload</title>
+    <script src="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.min.js"></script>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/extract-text.css" />
+</head>
+
+<body>
+
+    <!-- LANG SELECTOR -->
+    <div class="lang-selector">
+        <button data-lang-btn="en" onclick="applyLanguage('en')">EN</button>
+        <button data-lang-btn="es" onclick="applyLanguage('es')">ES</button>
+    </div>
+
+    <div class="container">
+
+        <a href="../home.html" data-i18n="ext.back"
+            style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:#6366f1;text-decoration:none;margin-bottom:1.5rem;font-weight:600;">←
+            All tools</a>
+
+        <h1 data-i18n="ext.heading">📝 Extract Text</h1>
+        <p class="subtitle" data-i18n="ext.subtitle">Pull text out of any PDF, right in your browser</p>
+        <div class="privacy-badge" data-i18n="ext.badge">
+            🔒 100% Private — Files never leave your device
+        </div>
+
+        <!-- DROP ZONE -->
+        <div class="drop-zone" id="dropZone">
+            <input type="file" id="fileInput" accept=".pdf" />
+            <div class="drop-icon">📂</div>
+            <p data-i18n-html="ext.drop.label_html"><span>Click to choose</span> or drag & drop a PDF here</p>
+            <p data-i18n="ext.drop.hint" style="font-size:0.8rem;margin-top:0.5rem;color:#475569;">
+                Works with digital PDFs and scanned documents
+            </p>
+        </div>
+
+        <!-- ERROR -->
+        <div class="error-box" id="errorBox"></div>
+
+        <!-- OPTIONS PANEL -->
+        <div class="tool-panel" id="optionsPanel">
+
+            <!-- File info row -->
+            <div class="file-row">
+                <span class="file-row-name" id="fileName">file.pdf</span>
+                <span class="file-row-pages" id="pageCountLabel">0 pages</span>
+                <label class="btn-change-file" for="fileInput" data-i18n="ext.change_file">Change file</label>
+            </div>
+
+            <!-- Mode toggle -->
+            <div class="mode-toggle">
+                <button class="mode-btn active" id="modeDigital" data-i18n="ext.mode_digital">
+                    📝 Digital PDF
+                </button>
+                <button class="mode-btn" id="modeOcr" data-i18n="ext.mode_ocr">
+                    📷 Scanned / OCR
+                </button>
+            </div>
+
+            <!-- OCR options (hidden until OCR mode) -->
+            <div class="ocr-options" id="ocrOptions">
+                <label data-i18n="ext.ocr_lang_label">OCR language:</label>
+                <select id="ocrLang">
+                    <option value="eng">English</option>
+                    <option value="spa">Spanish</option>
+                    <option value="fra">French</option>
+                    <option value="por">Portuguese</option>
+                    <option value="deu">German</option>
+                    <option value="ita">Italian</option>
+                </select>
+                <span class="ocr-note" data-i18n="ext.ocr_note">
+                    ⚠️ OCR downloads ~10 MB of language data on first use (cached by the browser).
+                </span>
+            </div>
+
+            <!-- Page range -->
+            <div class="range-row">
+                <label for="rangeInput" data-i18n="ext.range_label">Pages:</label>
+                <input type="text" id="rangeInput" placeholder="all" />
+                <span class="range-hint" data-i18n="ext.range_hint">e.g. 1-3, 5, 8-10 (blank = all)</span>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions">
+                <button class="btn-primary" id="extractBtn" data-i18n="ext.extract_btn">
+                    📝 Extract Text
+                </button>
+                <button class="btn-secondary" id="startOverBtn" data-i18n="ext.start_over">
+                    🗑 Start Over
+                </button>
+            </div>
+
+            <!-- Progress -->
+            <div class="progress-bar-wrap" id="progressWrap">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="progressLabel"></div>
+
+        </div>
+
+        <!-- RESULTS -->
+        <div class="results" id="results">
+            <div class="text-output-wrap">
+                <div class="text-output-header">
+                    <span class="text-output-label" data-i18n="ext.output_label">Extracted text</span>
+                    <div class="text-actions">
+                        <button class="btn-copy" id="copyBtn">📋 <span data-i18n="ext.copy">Copy</span></button>
+                        <button class="btn-download-txt" id="downloadBtn">⬇ <span data-i18n="ext.download_txt">Download
+                                .txt</span></button>
+                    </div>
+                </div>
+                <textarea class="text-output" id="textOutput" spellcheck="false"></textarea>
+                <div class="char-count" id="charCount"></div>
+            </div>
+            <div class="actions" style="margin-top:1rem;">
+                <button class="btn-secondary" id="extractAgainBtn" data-i18n="ext.extract_again">
+                    📝 Extract from another PDF
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/extract-text.js"></script>
+    <script>applyLanguage(localStorage.getItem('lang') || 'en');</script>
+
+</body>
+
+</html>

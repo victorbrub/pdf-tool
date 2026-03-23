@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="exi.title">Extract Images — No Upload</title>
+    <script src="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.min.js"></script>
+    <script src="https://unpkg.com/fflate@0.8.2/umd/index.js"></script>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/extract-images.css" />
+</head>
+
+<body>
+
+    <!-- LANG SELECTOR -->
+    <div class="lang-selector">
+        <button data-lang-btn="en" onclick="applyLanguage('en')">EN</button>
+        <button data-lang-btn="es" onclick="applyLanguage('es')">ES</button>
+    </div>
+
+    <div class="container">
+
+        <a href="../home.html" data-i18n="exi.back"
+            style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:#6366f1;text-decoration:none;margin-bottom:1.5rem;font-weight:600;">←
+            All tools</a>
+
+        <h1 data-i18n="exi.heading">🖼️ Extract Images</h1>
+        <p class="subtitle" data-i18n="exi.subtitle">Pull embedded images out of any PDF, right in your browser</p>
+        <div class="privacy-badge" data-i18n="exi.badge">
+            🔒 100% Private — Files never leave your device
+        </div>
+
+        <!-- DROP ZONE -->
+        <div class="drop-zone" id="dropZone">
+            <input type="file" id="fileInput" accept=".pdf" />
+            <div class="drop-icon">📂</div>
+            <p data-i18n-html="exi.drop.label_html"><span>Click to choose</span> or drag & drop a PDF here</p>
+            <p data-i18n="exi.drop.hint" style="font-size:0.8rem;margin-top:0.5rem;color:#475569;">
+                Extracts all raster images embedded in the document
+            </p>
+        </div>
+
+        <!-- ERROR -->
+        <div class="error-box" id="errorBox"></div>
+
+        <!-- OPTIONS PANEL -->
+        <div class="tool-panel" id="optionsPanel">
+
+            <!-- File info row -->
+            <div class="file-row">
+                <span class="file-row-name" id="fileName">file.pdf</span>
+                <span class="file-row-pages" id="pageCountLabel">0 pages</span>
+                <label class="btn-change-file" for="fileInput" data-i18n="exi.change_file">Change file</label>
+            </div>
+
+            <!-- Options -->
+            <div class="options-row">
+                <div class="option-group">
+                    <label for="rangeInput" data-i18n="exi.range_label">Pages:</label>
+                    <input type="text" id="rangeInput" placeholder="all" />
+                    <span class="options-hint" data-i18n="exi.range_hint">e.g. 1-3, 5 (blank = all)</span>
+                </div>
+                <div class="option-group">
+                    <label for="minSizeInput" data-i18n="exi.min_size_label">Min size (px):</label>
+                    <input type="number" id="minSizeInput" value="20" min="1" max="500" />
+                    <span class="options-hint" data-i18n="exi.min_size_hint">Filter out tiny images</span>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions">
+                <button class="btn-primary" id="extractBtn" data-i18n="exi.extract_btn">
+                    🖼️ Extract Images
+                </button>
+                <button class="btn-secondary" id="startOverBtn" data-i18n="exi.start_over">
+                    🗑 Start Over
+                </button>
+            </div>
+
+            <!-- Progress -->
+            <div class="progress-bar-wrap" id="progressWrap">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="progressLabel"></div>
+
+        </div>
+
+        <!-- RESULTS -->
+        <div class="results" id="results">
+            <div class="results-header">
+                <span class="found-badge" id="foundBadge">0 images</span>
+                <button class="btn-download-zip" id="downloadZipBtn" data-i18n="exi.download_zip">
+                    ⬇ Download all as ZIP
+                </button>
+            </div>
+            <div id="imgResultsContainer"></div>
+            <div class="actions" style="margin-top:1.25rem;">
+                <button class="btn-secondary" id="extractAgainBtn" data-i18n="exi.extract_again">
+                    🖼️ Extract from another PDF
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/extract-images.js"></script>
+    <script>applyLanguage(localStorage.getItem('lang') || 'en');</script>
+
+</body>
+
+</html>

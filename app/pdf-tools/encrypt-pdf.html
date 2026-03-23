@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="enc.title">Encrypt PDF — No Upload</title>
+    <script src="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.min.js"></script>
+    <script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/encrypt-pdf.css" />
+</head>
+
+<body>
+
+    <!-- LANG SELECTOR -->
+    <div class="lang-selector">
+        <button data-lang-btn="en" onclick="applyLanguage('en')">EN</button>
+        <button data-lang-btn="es" onclick="applyLanguage('es')">ES</button>
+    </div>
+
+    <div class="container">
+
+        <a href="../home.html" data-i18n="enc.back"
+            style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:#6366f1;text-decoration:none;margin-bottom:1.5rem;font-weight:600;">←
+            All tools</a>
+
+        <h1 data-i18n="enc.heading">🔐 Encrypt PDF</h1>
+        <p class="subtitle" data-i18n="enc.subtitle">Add password protection to any PDF, right in your browser</p>
+        <div class="privacy-badge" data-i18n="enc.badge">
+            🔒 100% Private — Files never leave your device
+        </div>
+
+        <!-- DROP ZONE -->
+        <div class="drop-zone" id="dropZone">
+            <input type="file" id="fileInput" accept=".pdf" />
+            <div class="drop-icon">📂</div>
+            <p data-i18n-html="enc.drop.label_html"><span>Click to choose</span> or drag & drop a PDF here</p>
+            <p data-i18n="enc.drop.hint" style="font-size:0.8rem;margin-top:0.5rem;color:#475569;">
+                A password will be required to open the output file
+            </p>
+        </div>
+
+        <!-- ERROR -->
+        <div class="error-box" id="errorBox"></div>
+
+        <!-- OPTIONS PANEL -->
+        <div class="tool-panel" id="optionsPanel">
+
+            <!-- File info row -->
+            <div class="file-row">
+                <span class="file-row-name" id="fileName">file.pdf</span>
+                <span class="file-row-pages" id="pageCountLabel">0 pages</span>
+                <label class="btn-change-file" for="fileInput" data-i18n="enc.change_file">Change file</label>
+            </div>
+
+            <!-- User password -->
+            <div class="password-group">
+                <label for="userPassInput" data-i18n="enc.user_pass_label">Password to open:</label>
+                <div class="password-input-wrap">
+                    <input class="pass-input" type="password" id="userPassInput" placeholder="Required"
+                        autocomplete="new-password" />
+                    <button class="btn-show-pass" id="toggleUserPass" type="button" title="Show/hide">👁</button>
+                </div>
+            </div>
+
+            <!-- Owner password -->
+            <div class="password-group">
+                <label for="ownerPassInput" data-i18n="enc.owner_pass_label">Owner password (optional):</label>
+                <div class="password-input-wrap">
+                    <input class="pass-input" type="password" id="ownerPassInput"
+                        placeholder="Defaults to user password if blank" autocomplete="new-password" />
+                    <button class="btn-show-pass" id="toggleOwnerPass" type="button" title="Show/hide">👁</button>
+                </div>
+                <p class="pass-hint" data-i18n="enc.owner_pass_hint">
+                    The owner password unlocks all restrictions in apps like Acrobat.
+                </p>
+            </div>
+
+            <!-- Permissions -->
+            <div class="permissions-section">
+                <span class="permissions-label" data-i18n="enc.perms_label">Allow in the protected PDF:</span>
+                <div class="permissions-grid">
+                    <label class="perm-item">
+                        <input type="checkbox" id="permPrint" checked />
+                        <span data-i18n="enc.perm_print">Printing</span>
+                    </label>
+                    <label class="perm-item">
+                        <input type="checkbox" id="permCopy" />
+                        <span data-i18n="enc.perm_copy">Copying text</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Notice -->
+            <div class="encrypt-notice">
+                <span class="encrypt-notice-icon">ℹ️</span>
+                <p data-i18n="enc.notice">
+                    <strong>Note:</strong> The output PDF is image-based — pages are re-rendered as images, so text
+                    will not be selectable. The content is visually identical and fully password-protected.
+                </p>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions">
+                <button class="btn-primary" id="encryptBtn" data-i18n="enc.encrypt_btn">
+                    🔐 Encrypt PDF
+                </button>
+                <button class="btn-secondary" id="startOverBtn" data-i18n="enc.start_over">
+                    🗑 Start Over
+                </button>
+            </div>
+
+            <!-- Progress -->
+            <div class="progress-bar-wrap" id="progressWrap">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="progressLabel"></div>
+
+        </div>
+
+        <!-- RESULTS -->
+        <div class="results" id="results">
+            <p class="results-title" data-i18n="enc.done">✅ Done! Your encrypted PDF is ready</p>
+            <div class="result-files" id="resultFiles"></div>
+            <div class="actions" style="margin-top:1rem;">
+                <button class="btn-secondary" id="encryptAgainBtn" data-i18n="enc.encrypt_again">
+                    🔐 Encrypt another PDF
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/encrypt-pdf.js"></script>
+    <script>applyLanguage(localStorage.getItem('lang') || 'en');</script>
+
+</body>
+
+</html>

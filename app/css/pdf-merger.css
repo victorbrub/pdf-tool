@@ -1,0 +1,169 @@
+/* pdf-merger.css — merger-specific styles only.
+   Common/shared styles live in common.css */
+
+/* ── FILE LIST HEADER ── */
+.file-list-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.1rem;
+    flex-wrap: wrap;
+}
+
+.file-list-header .options-title {
+    margin-bottom: 0;
+    flex: 1;
+}
+
+.file-count-badge {
+    background: #312e81;
+    color: #a5b4fc;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.btn-add-more {
+    background: none;
+    border: 1px dashed #4f46e5;
+    color: #818cf8;
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: inherit;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-add-more:hover {
+    border-color: #6366f1;
+    color: #a5b4fc;
+    background: #1e1b4b;
+}
+
+/* ── FILE LIST ── */
+.merger-file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.merger-file-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 0.6rem;
+    padding: 0.6rem 0.75rem;
+    user-select: none;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.merger-file-item.drag-over {
+    border-color: #6366f1;
+    background: #1e1b4b;
+}
+
+.merger-file-item.dragging {
+    opacity: 0.35;
+}
+
+/* ── DRAG HANDLE ── */
+.drag-handle {
+    color: #475569;
+    cursor: grab;
+    font-size: 1.15rem;
+    line-height: 1;
+    flex-shrink: 0;
+    padding: 0 0.1rem;
+}
+
+.drag-handle:active {
+    cursor: grabbing;
+}
+
+/* ── PAGE THUMBNAIL ── */
+.file-thumb-wrap {
+    flex-shrink: 0;
+    width: 30px;
+    height: 42px;
+    border-radius: 3px;
+    border: 1px solid #334155;
+    background: #1e293b;
+    overflow: hidden;
+}
+
+.file-thumb-wrap canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* ── FILE META ── */
+.file-meta {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.file-item-name {
+    font-size: 0.85rem;
+    color: #e2e8f0;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-item-pages {
+    font-size: 0.73rem;
+    color: #64748b;
+}
+
+/* ── ORDER BADGE ── */
+.file-order-badge {
+    background: #1e293b;
+    color: #64748b;
+    border: 1px solid #334155;
+    border-radius: 999px;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+/* ── REMOVE BUTTON ── */
+.btn-remove {
+    background: none;
+    border: none;
+    color: #475569;
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 0.2rem 0.35rem;
+    border-radius: 0.3rem;
+    font-family: inherit;
+    transition: all 0.15s;
+    flex-shrink: 0;
+}
+
+.btn-remove:hover {
+    color: #ef4444;
+    background: #2d0a0a;
+}
+
+/* ── MERGE AGAIN button in results ── */
+.btn-merge-again {
+    margin-top: 1rem;
+    width: 100%;
+}

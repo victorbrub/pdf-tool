@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="crp.title">Crop PDF</title>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.min.js"></script>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/crop-pdf.css" />
+</head>
+
+<body>
+    <div class="lang-selector">
+        <button class="lang-btn active" onclick="applyLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="applyLanguage('es')">ES</button>
+    </div>
+
+    <div class="container">
+        <a href="../home.html" class="back-link" data-i18n="crp.back">← All tools</a>
+        <h1 class="tool-heading" data-i18n="crp.heading">Crop PDF</h1>
+        <p class="subtitle" data-i18n="crp.subtitle">Trim margins and adjust each page's visible area.</p>
+        <div class="privacy-badge" data-i18n="crp.badge">🔒 All processing happens in your browser — no uploads, no
+            server.</div>
+
+        <!-- Drop zone -->
+        <div class="drop-zone" id="dropZone">
+            <div class="drop-zone-icon">✂️</div>
+            <p class="drop-zone-text" data-i18n="crp.drop">Drop your PDF here, or click to choose</p>
+            <p class="drop-zone-hint" data-i18n="crp.dropHint">One PDF file</p>
+            <input type="file" id="fileInput" accept="application/pdf" style="display:none" />
+        </div>
+
+        <!-- Error box -->
+        <div class="error-box" id="errorBox" style="display:none"></div>
+
+        <!-- Options panel -->
+        <div class="tool-panel" id="optionsPanel" style="display:none">
+            <div class="file-row">
+                <span class="file-row-name" id="fileNameLabel"></span>
+                <span class="file-row-pages" id="filePagesLabel"></span>
+                <button class="btn-change-file" id="btnChangeFile" data-i18n="crp.change">Change file</button>
+            </div>
+
+            <!-- Scope toggle: all pages | per page -->
+            <div class="scope-toggle">
+                <button class="scope-btn active" id="btnScopeAll" data-i18n="crp.scopeAll">All pages</button>
+                <button class="scope-btn" id="btnScopePage" data-i18n="crp.scopePage">Per page</button>
+            </div>
+
+            <!-- Per-page navigator (hidden when all-pages scope) -->
+            <div id="pageNavWrap" style="display:none">
+                <div class="page-nav">
+                    <button class="btn-page-nav" id="btnPrevPage">&#8249;</button>
+                    <span class="page-indicator" id="pageIndicator"></span>
+                    <button class="btn-page-nav" id="btnNextPage">&#8250;</button>
+                </div>
+            </div>
+
+            <!-- Preview canvas -->
+            <div class="crop-preview-wrap" id="previewWrap" style="display:none">
+                <canvas class="crop-canvas" id="previewCanvas"></canvas>
+            </div>
+
+            <!-- Margin inputs -->
+            <div class="crop-grid">
+                <div class="crop-field">
+                    <label data-i18n="crp.marginTop">Top (mm)</label>
+                    <input type="number" class="crop-input" id="marginTop" value="0" min="0" step="0.5" />
+                </div>
+                <div class="crop-field">
+                    <label data-i18n="crp.marginBottom">Bottom (mm)</label>
+                    <input type="number" class="crop-input" id="marginBottom" value="0" min="0" step="0.5" />
+                </div>
+                <div class="crop-field">
+                    <label data-i18n="crp.marginLeft">Left (mm)</label>
+                    <input type="number" class="crop-input" id="marginLeft" value="0" min="0" step="0.5" />
+                </div>
+                <div class="crop-field">
+                    <label data-i18n="crp.marginRight">Right (mm)</label>
+                    <input type="number" class="crop-input" id="marginRight" value="0" min="0" step="0.5" />
+                </div>
+            </div>
+            <p class="crop-unit-note" data-i18n="crp.unitNote">Enter margins in millimetres to remove from each edge.
+            </p>
+
+            <!-- Progress -->
+            <div class="progress-bar-wrap" id="progressWrap" style="display:none">
+                <div class="progress-bar" id="progressBar" style="width:0%"></div>
+            </div>
+            <p class="progress-label" id="progressLabel" style="display:none"></p>
+
+            <button class="btn-primary" id="btnCrop" data-i18n="crp.cropBtn">Crop PDF</button>
+        </div>
+
+        <!-- Results -->
+        <div class="results" id="results" style="display:none">
+            <div class="results-icon">✅</div>
+            <p class="results-title" data-i18n="crp.done">Done! Your cropped PDF is ready.</p>
+            <a class="btn-primary" id="downloadLink" download data-i18n="crp.download">Download PDF</a>
+            <button class="btn-secondary" id="btnAgain" data-i18n="crp.again">Crop another</button>
+        </div>
+    </div>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/crop-pdf.js"></script>
+    <script>applyLanguage(localStorage.getItem('lang') || 'en');</script>
+</body>
+
+</html>

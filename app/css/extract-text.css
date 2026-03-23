@@ -1,0 +1,261 @@
+/* extract-text.css — tool-specific styles only. Common styles in common.css */
+
+/* ── FILE ROW ── */
+.file-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 0.6rem;
+    padding: 0.6rem 1rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.file-row-name {
+    font-size: 0.85rem;
+    color: #e2e8f0;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+}
+
+.file-row-pages {
+    font-size: 0.73rem;
+    color: #64748b;
+    white-space: nowrap;
+}
+
+.btn-change-file {
+    background: none;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    padding: 0.25rem 0.65rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-family: inherit;
+    transition: all 0.15s;
+    white-space: nowrap;
+}
+
+.btn-change-file:hover {
+    border-color: #6366f1;
+    color: #a5b4fc;
+}
+
+/* ── MODE TOGGLE ── */
+.mode-toggle {
+    display: flex;
+    border: 1px solid #334155;
+    border-radius: 0.6rem;
+    overflow: hidden;
+    width: fit-content;
+    margin: 0 auto 1.5rem;
+}
+
+.mode-btn {
+    background: #0f172a;
+    border: none;
+    color: #94a3b8;
+    padding: 0.55rem 1.4rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.mode-btn+.mode-btn {
+    border-left: 1px solid #334155;
+}
+
+.mode-btn:hover {
+    color: #e2e8f0;
+    background: #1e293b;
+}
+
+.mode-btn.active {
+    background: #312e81;
+    color: #a5b4fc;
+}
+
+/* ── OCR OPTIONS ── */
+.ocr-options {
+    display: none;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 0.6rem;
+    padding: 0.85rem 1rem;
+    margin-bottom: 1.25rem;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.ocr-options.visible {
+    display: flex;
+}
+
+.ocr-options label {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    white-space: nowrap;
+}
+
+.ocr-options select {
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: #e2e8f0;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.4rem;
+    font-size: 0.82rem;
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.ocr-options select:focus {
+    border-color: #6366f1;
+}
+
+.ocr-note {
+    font-size: 0.72rem;
+    color: #475569;
+    font-style: italic;
+    width: 100%;
+    margin-top: 0.1rem;
+}
+
+/* ── PAGE RANGE ── */
+.range-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.range-row label {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    white-space: nowrap;
+}
+
+.range-row input[type="text"] {
+    background: #0f172a;
+    border: 1px solid #334155;
+    color: #e2e8f0;
+    padding: 0.32rem 0.65rem;
+    border-radius: 0.4rem;
+    font-size: 0.82rem;
+    font-family: inherit;
+    width: 180px;
+    transition: border-color 0.15s;
+    outline: none;
+}
+
+.range-row input[type="text"]::placeholder {
+    color: #475569;
+}
+
+.range-row input[type="text"]:focus {
+    border-color: #6366f1;
+}
+
+.range-hint {
+    font-size: 0.72rem;
+    color: #475569;
+}
+
+/* ── TEXT OUTPUT ── */
+.text-output-wrap {
+    margin-top: 0.25rem;
+}
+
+.text-output-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.text-output-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.text-actions {
+    display: flex;
+    gap: 0.45rem;
+}
+
+.btn-copy,
+.btn-download-txt {
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    padding: 0.3rem 0.75rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-family: inherit;
+    font-weight: 600;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.btn-copy:hover,
+.btn-download-txt:hover {
+    border-color: #6366f1;
+    color: #a5b4fc;
+}
+
+.btn-copy.copied {
+    border-color: #0d9488;
+    color: #5eead4;
+}
+
+.text-output {
+    width: 100%;
+    min-height: 320px;
+    max-height: 540px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 0.6rem;
+    color: #cbd5e1;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.82rem;
+    line-height: 1.65;
+    padding: 1rem;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.text-output:focus {
+    border-color: #6366f1;
+}
+
+.char-count {
+    font-size: 0.72rem;
+    color: #475569;
+    text-align: right;
+    margin-top: 0.4rem;
+}

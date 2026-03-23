@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="pgn.title">Add Page Numbers — No Upload</title>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/add-page-numbers.css" />
+</head>
+
+<body>
+
+    <div class="lang-selector">
+        <button data-lang-btn="en" onclick="applyLanguage('en')">EN</button>
+        <button data-lang-btn="es" onclick="applyLanguage('es')">ES</button>
+    </div>
+
+    <div class="container">
+
+        <a href="../home.html" data-i18n="pgn.back"
+            style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:#6366f1;text-decoration:none;margin-bottom:1.5rem;font-weight:600;">←
+            All tools</a>
+
+        <h1 data-i18n="pgn.heading">🔢 Add Page Numbers</h1>
+        <p class="subtitle" data-i18n="pgn.subtitle">Stamp page numbers onto every page of your PDF</p>
+        <div class="privacy-badge" data-i18n="pgn.badge">🔒 100% Private — Files never leave your device</div>
+
+        <!-- DROP ZONE -->
+        <div class="drop-zone" id="dropZone">
+            <input type="file" id="fileInput" accept=".pdf" />
+            <div class="drop-icon">📂</div>
+            <p data-i18n-html="pgn.drop.label_html"><span>Click to choose</span> or drag & drop a PDF here</p>
+            <p data-i18n="pgn.drop.hint" style="font-size:0.8rem;margin-top:0.5rem;color:#475569;">Configurable format,
+                position and size</p>
+        </div>
+
+        <!-- ERROR -->
+        <div class="error-box" id="errorBox"></div>
+
+        <!-- OPTIONS PANEL -->
+        <div class="tool-panel" id="optionsPanel">
+
+            <div class="file-row">
+                <span class="file-row-name" id="fileName">file.pdf</span>
+                <span class="file-row-pages" id="pageCountLabel">0 pages</span>
+                <label class="btn-change-file" for="fileInput" data-i18n="pgn.change_file">Change file</label>
+            </div>
+
+            <!-- Format -->
+            <div class="option-section">
+                <span class="section-label" data-i18n="pgn.format_label">Format</span>
+                <div class="format-grid">
+                    <button class="format-btn active" data-format="n">
+                        <span data-i18n="pgn.fmt_n">Number only</span>
+                        <span class="format-preview">1 · 2 · 3</span>
+                    </button>
+                    <button class="format-btn" data-format="n_total">
+                        <span data-i18n="pgn.fmt_n_total">N / Total</span>
+                        <span class="format-preview">1/5 · 2/5 · 3/5</span>
+                    </button>
+                    <button class="format-btn" data-format="page_n">
+                        <span data-i18n="pgn.fmt_page_n">Page N</span>
+                        <span class="format-preview">Page 1 · Page 2</span>
+                    </button>
+                    <button class="format-btn" data-format="page_n_of_total">
+                        <span data-i18n="pgn.fmt_page_n_of_total">Page N of Total</span>
+                        <span class="format-preview">Page 1 of 5</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Position -->
+            <div class="option-section">
+                <span class="section-label" data-i18n="pgn.position_label">Position</span>
+                <div class="position-grid">
+                    <button class="position-btn active" data-pos="bottom-center">
+                        <span class="position-icon">⬇️</span>
+                        <span data-i18n="pgn.pos_bc">Bottom Center</span>
+                    </button>
+                    <button class="position-btn" data-pos="bottom-left">
+                        <span class="position-icon">↙️</span>
+                        <span data-i18n="pgn.pos_bl">Bottom Left</span>
+                    </button>
+                    <button class="position-btn" data-pos="bottom-right">
+                        <span class="position-icon">↘️</span>
+                        <span data-i18n="pgn.pos_br">Bottom Right</span>
+                    </button>
+                    <button class="position-btn" data-pos="top-center">
+                        <span class="position-icon">⬆️</span>
+                        <span data-i18n="pgn.pos_tc">Top Center</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Font size -->
+            <div class="option-section">
+                <span class="section-label" data-i18n="pgn.style_label">Style</span>
+                <div class="option-row">
+                    <label for="fontSizeSlider" data-i18n="pgn.font_size">Font size:</label>
+                    <input type="range" id="fontSizeSlider" min="8" max="28" value="12" step="1" />
+                    <span class="option-value" id="fontSizeValue">12 pt</span>
+                </div>
+                <div class="option-row">
+                    <label for="startNumInput" data-i18n="pgn.start_num">Start from:</label>
+                    <input type="number" id="startNumInput" min="0" max="9999" value="1" />
+                </div>
+                <div class="option-row" style="border:none;padding:0.3rem 0.25rem;">
+                    <label class="skip-row">
+                        <input type="checkbox" id="skipFirstPage" />
+                        <span data-i18n="pgn.skip_first">Skip first page (cover / title page)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions">
+                <button class="btn-primary" id="applyBtn" data-i18n="pgn.apply_btn">🔢 Add Page Numbers</button>
+                <button class="btn-secondary" id="startOverBtn" data-i18n="pgn.start_over">🗑 Start Over</button>
+            </div>
+
+            <!-- Progress -->
+            <div class="progress-bar-wrap" id="progressWrap">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="progressLabel"></div>
+
+        </div>
+
+        <!-- RESULTS -->
+        <div class="results" id="results">
+            <p class="results-title" data-i18n="pgn.done">✅ Done! Your numbered PDF is ready</p>
+            <div class="result-files" id="resultFiles"></div>
+            <div class="actions" style="margin-top:1rem;">
+                <button class="btn-secondary" id="applyAgainBtn" data-i18n="pgn.again">🔢 Number another PDF</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/add-page-numbers.js"></script>
+    <script>applyLanguage(localStorage.getItem('lang') || 'en');</script>
+
+</body>
+
+</html>

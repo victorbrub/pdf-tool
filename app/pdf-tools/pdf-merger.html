@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="merger.title">PDF Merger — No Upload</title>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.min.js"></script>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/pdf-merger.css" />
+</head>
+
+<body>
+
+    <!-- LANG SELECTOR -->
+    <div class="lang-selector">
+        <button data-lang-btn="en" onclick="applyLanguage('en')">EN</button>
+        <button data-lang-btn="es" onclick="applyLanguage('es')">ES</button>
+    </div>
+
+    <div class="container">
+
+        <a href="../home.html" data-i18n="merger.back"
+            style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:#6366f1;text-decoration:none;margin-bottom:1.5rem;font-weight:600;">←
+            All tools</a>
+
+        <h1 data-i18n="merger.heading">🔗 PDF Merger</h1>
+        <p class="subtitle" data-i18n="merger.subtitle">Combine multiple PDFs into one, right in your browser</p>
+        <div class="privacy-badge" data-i18n="merger.badge">
+            🔒 100% Private — Files never leave your device
+        </div>
+
+        <!-- DROP ZONE -->
+        <div class="drop-zone" id="mergerDropZone">
+            <input type="file" id="fileInput" accept=".pdf" multiple />
+            <div class="drop-icon">📂</div>
+            <p data-i18n-html="merger.drop.label_html"><span>Click to choose</span> or drag & drop PDFs here</p>
+            <p data-i18n="merger.drop.hint" style="font-size:0.8rem; margin-top:0.5rem; color:#475569;">
+                Select multiple files — they'll be merged in the order you add them
+            </p>
+        </div>
+
+        <!-- ERROR (visible in both states) -->
+        <div class="error-box" id="mergerErrorBox"></div>
+
+        <!-- FILE SECTION (shown after files are added) -->
+        <div class="tool-panel" id="mergerFileSection">
+
+            <div class="file-list-header">
+                <p class="options-title" data-i18n="merger.files_title">📋 Files to merge</p>
+                <span class="file-count-badge" id="fileCountBadge">0 files</span>
+                <label class="btn-add-more" for="addMoreInput" data-i18n="merger.add_more">+ Add more</label>
+                <input type="file" id="addMoreInput" accept=".pdf" multiple style="display:none" />
+            </div>
+
+            <div class="merger-file-list" id="mergerFileList"></div>
+
+            <div class="actions">
+                <button class="btn-primary" id="mergeBtn" disabled data-i18n="merger.merge_btn">
+                    🔗 Merge PDFs
+                </button>
+                <button class="btn-secondary" id="startOverBtn" data-i18n="merger.start_over">
+                    🗑 Start Over
+                </button>
+            </div>
+
+        </div>
+
+        <!-- RESULTS -->
+        <div class="results" id="mergerResults">
+            <p class="results-title" data-i18n="merger.done">✅ Done! Your merged PDF is ready</p>
+            <div class="result-files">
+                <div class="result-file">
+                    <span id="mergedFileName">merged.pdf</span>
+                    <a id="mergedDownloadLink" class="btn-download" data-i18n="merger.download">⬇ Download</a>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn-secondary btn-merge-again" id="mergeAgainBtn" data-i18n="merger.merge_again">
+                    🔗 Merge more files
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/merger-state.js"></script>
+    <script src="../js/merger-ui.js"></script>
+    <script src="../js/merger-main.js"></script>
+    <script>applyLanguage(localStorage.getItem('lang') || 'en');</script>
+
+</body>
+
+</html>

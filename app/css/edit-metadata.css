@@ -1,0 +1,125 @@
+/* edit-metadata.css — Edit PDF Metadata tool */
+
+.file-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 0.6rem;
+    padding: 0.6rem 1rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.file-row-name {
+    font-size: 0.85rem;
+    color: #e2e8f0;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+}
+
+.btn-change-file {
+    background: none;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    padding: 0.25rem 0.65rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-family: inherit;
+    transition: all 0.15s;
+    white-space: nowrap;
+}
+
+.btn-change-file:hover {
+    border-color: #6366f1;
+    color: #a5b4fc;
+}
+
+/* ── METADATA FIELDS ── */
+.meta-field {
+    margin-bottom: 1rem;
+}
+
+.meta-field label {
+    display: block;
+    font-size: 0.77rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+
+.meta-input {
+    width: 100%;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 0.55rem;
+    color: #e2e8f0;
+    padding: 0.6rem 0.9rem;
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+}
+
+.meta-input:focus {
+    border-color: #6366f1;
+}
+
+.meta-input::placeholder {
+    color: #475569;
+}
+
+.meta-hint {
+    font-size: 0.73rem;
+    color: #475569;
+    margin-top: 0.3rem;
+    line-height: 1.45;
+}
+
+/* ── READ-ONLY FIELDS ── */
+.meta-readonly {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 0.65rem 0.9rem;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 0.55rem;
+    margin-bottom: 1.1rem;
+}
+
+.meta-readonly-row {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.meta-readonly-label {
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 5.5rem;
+    flex-shrink: 0;
+}
+
+.meta-readonly-value {
+    color: #94a3b8;
+}
+
+.section-divider {
+    border: none;
+    border-top: 1px solid #1e293b;
+    margin: 1.25rem 0;
+}
